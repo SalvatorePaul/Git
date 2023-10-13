@@ -99,9 +99,7 @@ char *lookFor_path(info_t *info, char *pathstrn, char *command)
     if ((lenstrn(command) > 2) && cmpstrn(command, "./", 2) == 0)
     {
         if (cmd_exists(info, command))
-            return dupStrn(command);  /* Duplicate and return the command. */
-        else
-            return NULL;  /* Command is not valid. */
+            return (command);  /* Duplicate and return the command. */
     }
 
     for (a = 0; pathstrn[a] != '\0'; a++)
@@ -113,7 +111,7 @@ char *lookFor_path(info_t *info, char *pathstrn, char *command)
 
             /* If the extracted path is empty, append the command directly. */
             if (!*path)
-                path = dupStrn(command);
+                strcat(path, command);
             else
             {
                 /* Otherwise, concatenate the command to the path with a '/' separator. */
