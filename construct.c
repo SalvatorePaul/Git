@@ -70,8 +70,8 @@ int cd(info_t *info)
 	}
 	else
 	{/* Set "OLDPWD" to the previous current directory. */
-		_mysetenv(info, "OLDPWD", get_env(info, "PWD="));
-		_mysetenv(info, "PWD", getcwd(buff, 1024));/* Set the new "PWD"*/
+		set_env(info, "OLDPWD", get_env(info, "PWD="));
+		set_env(info, "PWD", getcwd(buff, 1024));/* Set the new "PWD"*/
 	}
 	return (0);
 }

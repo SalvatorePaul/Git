@@ -54,29 +54,6 @@ char *dup_chars(char *pathstrn, int begin, int end)
 }
 
 /**
- * cmpstrn - Compare two strings up to a specified length.
- * @s1: The first string to compare.
- * @s2: The second string to compare.
- * @n: The maximum number of characters to compare.
- *
- * Return: 0 if the strings are equal up to the specified length, a positive
- *         value if s1 is greater, or a negative value if s2 is greater.
- */
-int cmpstrn(const char *s1, const char *s2, size_t n)
-{
-    while (n > 0) {
-        if (*s1 != *s2)
-            return (*s1 - *s2);
-        if (*s1 == '\0')
-            return 0;
-        s1++;
-        s2++;
-        n--;
-    }
-    return 0;
-}
-
-/**
  * lookFor_path - Find the full path of a command in the PATH string.
  * @info: Pointer to the info struct.
  * @pathstrn: The PATH string to search for the command.

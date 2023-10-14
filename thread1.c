@@ -11,7 +11,7 @@
  * Return: A pointer to the duplicated string, or NULL if 'strn' is NULL or
  *         if memory allocation fails.
  */
-char *dupstrn(const char *strn)
+char *dupStrn(const char *strn)
 {
 	size_t length;
 	char *duplicate;

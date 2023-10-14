@@ -1,7 +1,7 @@
 #include "myshell.h"
 
 /**
- * errputchar - Write a character to the standard error (stderr).
+ * _errputchar - Write a character to the standard error (stderr).
  * @c: The character to be written to stderr.
  * This function writes a single character 'c' to the standard error (stderr)
  * stream. It uses a static buffer to efficiently collect characters before
@@ -10,7 +10,7 @@
  * Return: On success, it returns 1. On error, -1 is returned, and errno is
  *         set appropriately.
  */
-int errputchar(char c)
+int _errputchar(char c)
 {
 	static char buff[WRITE_BUFFER_SIZE];
 	static int a;
@@ -72,14 +72,14 @@ int _putfd(char c, int fd)
 	return (1);
 }
 /**
- *errputs - Print an input string to the standard error stream.
+ * _errputs - Print an input string to the standard error stream.
  * @str: The string to be printed.
  * This function prints the characters from the 'str' string to the standard
  * error stream (stderr).
  *
  * Return: It does not return a value (void).
  */
-void errputs(char *str)
+void _errputs(char *str)
 {
 	int a = 0; 
 	
@@ -90,7 +90,7 @@ void errputs(char *str)
 	while (str[a] != '\0')
 	{
 		/* Call _eputchar to write the current character to the standard error stream (stderr). */
-		errputchar(str[a]);
+		_errputchar(str[a]);
 		a++;
 	}
 }
