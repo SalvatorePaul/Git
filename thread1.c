@@ -13,29 +13,28 @@
  */
 char *dupstrn(const char *strn)
 {
-	char *duplicate;    /* Declare a pointer for the duplicated string */
-    int length = 0;     /* Initialize a variable to store the length of the input string */
+	size_t length;
+	char *duplicate;
 
-    /* Check if the input string is NULL */
-    if (strn == NULL)
-        return (NULL);
+	if (strn == NULL)
+    {
+        return NULL; /* Handle NULL input */
+    }
 
     /* Calculate the length of the input string */
-    while (*strn++)
-        length++;
+    length = strlen(strn);
 
     /* Allocate memory for the duplicated string, including space for the null terminator */
-    duplicate = malloc(sizeof(char) * (length + 1));
+    duplicate = malloc(length + 1);
 
-    /* Check if memory allocation was successful */
-    if (!duplicate)
-        return (NULL);
+    if (duplicate == NULL)
+    {
+        return NULL; /* Handle memory allocation failure */
+    }
+    /* Copy characters from the input string to the duplicated string */
+    strcpy(duplicate, strn);
 
-    /* Copy characters from the input string to the duplicated string in reverse order */
-    for (length++; length--;)
-        duplicate[length] = *--strn;
-
-    return (duplicate);  /* Return a pointer to the duplicated string */
+    return duplicate; /* Return a pointer to the duplicated string */
 }
 /**
  * wrt_chr - Write a character to stdout.

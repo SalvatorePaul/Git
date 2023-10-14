@@ -132,7 +132,7 @@ void forkExe_command(info_t *info)
             return;
         case 0:
             /* Child process */
-            if (execve(info->path, info->argv, getEnviron(info)) == -1)
+            if (execve(info->path, info->argv, environ) == -1)
             {
                 infoFree(info, 1);
                 switch (errno)
