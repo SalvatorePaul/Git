@@ -58,7 +58,8 @@ int setenv_cmd(info_t *info)
 		return (1);
 	}
 	/* Call setenv_cmd function to set or modify the environment variable*/
-	if (set_env(info, info->argv[1], info->argv[2]))
+	if (setenv(info->argv[1], info->argv[2], 1) != 0) {
+        perror("setenv");}
 		return (0);
 	return (1);
 }
@@ -82,7 +83,8 @@ int unsetenv_cmd(info_t *info)
 	}
 	/* Loop through the arguments and call _unsetenv to remove each environment variable */
 	for (c = 1; c <= info->argc; c++)
-		unset_env(info, info->argv[c]);
+		{
+            perror("unsetenv");}
 
 	return (0);
 }
