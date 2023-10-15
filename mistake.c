@@ -24,8 +24,35 @@ int _errputchar(char c)
 		buff[a++] = c;
 	return (1);
 }
+
 /**
- *putsfd - Print a string to a specified file descriptor.
+ * _putfnd - Write a character to the specified file descriptor.
+ * @c: The character to write.
+ * @fd: The file descriptor to write to.
+ * This function writes the character 'c' to the file descriptor 'fd'. If the
+ * internal buffer is full or the character is a flush signal (BUF_FLUSH), the
+ * buffer is written to 'fd', and the buffer is reset. Returns 1 on success,
+ * or -1 on error with appropriate errno setting.
+ *
+ * Return: 1 on success, -1 on error.
+ */
+int _putfnd(char c, int fd)
+{
+        static char buff[WRITE_BUFFER_SIZE];
+        static int a;
+
+        if (c == BUFFER_FLUSH || a >= WRITE_BUFFER_SIZE)
+        {
+                write(fd, buff, a);
+                a = 0;
+        }
+        if (c != BUFFER_FLUSH)
+                buff[a++] = c;
+        return (1);
+}
+
+/**
+ * _putsfnd - Print a string to a specified file descriptor.
  * @str: The string to be printed.
  * @fd: The file descriptor to write to.
  * This function prints the characters from the 'str' string to the file
@@ -33,7 +60,7 @@ int _errputchar(char c)
  *
  * Return: The number of characters successfully written.
  */
-int putsfd(char *str, int fd)
+int _putsfnd(char *str, int fd)
 {
 	int i = 0;
 
@@ -45,31 +72,6 @@ int putsfd(char *str, int fd)
 		i += _putfnd(*str, fd);
 	}
 	return (i);
-}
-/**
- * _putfd - Write a character to the specified file descriptor.
- * @c: The character to write.
- * @fd: The file descriptor to write to.
- * This function writes the character 'c' to the file descriptor 'fd'. If the
- * internal buffer is full or the character is a flush signal (BUF_FLUSH), the
- * buffer is written to 'fd', and the buffer is reset. Returns 1 on success,
- * or -1 on error with appropriate errno setting.
- *
- * Return: 1 on success, -1 on error.
- */
-int _putfd(char c, int fd)
-{
-	static char buff[WRITE_BUFFER_SIZE];
-	static int a;
-
-	if (c == BUFFER_FLUSH || a >= WRITE_BUFFER_SIZE)
-	{
-		write(fd, buff, a);
-		a = 0;
-	}
-	if (c != BUFFER_FLUSH)
-		buff[a++] = c;
-	return (1);
 }
 /**
  * _errputs - Print an input string to the standard error stream.

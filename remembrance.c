@@ -1,13 +1,13 @@
 #include "myshell.h"
 
 /**
- * bfree - Frees a pointer and sets it to NULL.
+ * memfree - Frees a pointer and sets it to NULL.
  *
  * @ptr: Address of the pointer to free.
  *
  * Return: 1 if memory was freed and pointer set to NULL, 0 otherwise.
  */
-int bfree(void **ptr)
+int memfree(void **ptr)
 {
     if (ptr != NULL && *ptr != NULL)
     {
