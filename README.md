@@ -152,7 +152,6 @@ Simple shell 0.4 +
 Implement the env built-in, that prints the current environment
 
 ## 6. Simple shell 0.1.1
-# advanced
 Simple shell 0.1 +
 
 Write your own getline function
@@ -164,7 +163,6 @@ You don’t have to:
 be able to move the cursor
 
 ## 7. Simple shell 0.2.1
-# advanced
 Simple shell 0.2 +
 
 You are not allowed to use strtok
@@ -173,14 +171,12 @@ Repo:
 GitHub repository: simple_shell
 
 ## 8. Simple shell 0.4.1
-# advanced
 Simple shell 0.4 +
 
 handle arguments for the built-in exit
 Usage: exit status, where status is an integer used to exit the shell
 
 ## 9. setenv, unsetenv
-# advanced
 Simple shell 1.0 +
 
 Implement the setenv and unsetenv builtin commands
@@ -195,7 +191,6 @@ Command syntax: unsetenv VARIABLE
 Should print something on stderr on failure
 
 ## 10. cd
-# advanced
 Simple shell 1.0 +
 
 Implement the builtin command cd:
@@ -208,19 +203,16 @@ You have to update the environment variable PWD when you change directory
 man chdir, man getcwd
 
 ## 11. ;
-# advanced
 Simple shell 1.0 +
 
 Handle the commands separator ;
 
 ## 12. && and ||
-# advanced
 Simple shell 1.0 +
 
 Handle the && and || shell logical operators
 
 ## 13. alias
-# advanced
 Simple shell 1.0 +
 
 Implement the alias builtin command
@@ -230,7 +222,6 @@ alias name [name2 ...]: Prints the aliases name, name2, etc 1 per line, in the f
 alias name='value' [...]: Defines an alias for each name whose value is given. If name is already an alias, replaces its value with value
 
 ## 14. Variables
-# advanced
 Simple shell 1.0 +
 
 Handle variables replacement
@@ -238,13 +229,11 @@ Handle the $? variable
 Handle the $$ variable
 
 ## 15. Comments
-# advanced
 Simple shell 1.0 +
 
 Handle comments (#)
 
 ## 16. File as input
-# advanced
 Simple shell 1.0 +
 
 Usage: simple_shell [filename]
