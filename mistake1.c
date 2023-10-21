@@ -1,10 +1,10 @@
 #include "myshell.h"
 
 /**
- * number_to_strn - Convert a long integer to a string representation in a specified base.
- * @num: The number to be converted.
- * @base: The numeric base for the conversion (e.g., 10 for decimal, 16 for hexadecimal).
- * @flags: Flags controlling the conversion (e.g., CONVERT_UNSIGNED for unsigned output).
+ * number_to_strn - Convert a long integer to a string rep in a specified base.
+ * @number: The number to be converted.
+ * @base: The numeric base for the conversion (e.g. 16 for hexadecimal).
+ * @flags: Flags controlling the conversion
  *
  * Return: A pointer to the resulting string.
  */
@@ -139,5 +139,6 @@ void remv_comnt(char *buffer)
  */
 void printErro(info_t *info, char *estr)
 {
-	fprintf(stderr, "%s: %d: %s: %s\n", info->fname, info->line_count, info->argv[0], estr);
+	fprintf(stderr, "%s: %d: %s: %s\n",
+			info->fname, info->line_count, info->argv[0], estr);
 }

@@ -8,7 +8,7 @@
  * program to continue after displaying a prompt.
  * Return: void
  */
-void handle_sign(__attribute__((unused))int sig_num)
+void handle_sign(__attribute__((unused)) int sig_num)
 {
 	/* Print a newline character and a prompt */
 	prnt_strn("\n");
@@ -20,59 +20,59 @@ void handle_sign(__attribute__((unused))int sig_num)
 /**
  * input_buf - Buffer chained commands and read input.
  * @info: Parameter struct containing information about the input.
- * @buf: Pointer to the buffer for storing input data (updated by the function).
- * @len:  Pointer to the length of the data in the buffer (updated by the function).
+ * @buff: Pointer to the buffer for storing input data.
+ * @len: Pointer to the length of the data in the buffer.
  * This function is responsible for buffering chained commands and reading
- * input from the standard input (stdin) into the provided buffer (buf).
- * It updates the 'buf' and 'len' pointers to store the read data.
+ * input from the standard input (stdin) into the provided buffer (buff).
+ * It updates the 'buff' and 'len' pointers to store the read data.
  *
  * Return: The number of bytes read, or 0 if the buffer is not empty,
- *         or -1 on error.
+ * or -1 on error.
  */
 ssize_t input_buf(info_t *info, char **buff, size_t *len)
 {
-        size_t len_p = 0;
-        ssize_t a = 0;
+	size_t len_p = 0;
+	ssize_t a = 0;
 
-        /* If the buffer is empty, fill it with input data */
-        if (!*len)
-        {
-                /* Free the previous buffer and set it to NULL */
-                free(*buff);
-                *buff = NULL;
-                /* Set up a signal handler for Ctrl-C interruptions */
-                signal(SIGINT, handle_sign);
+	/* If the buffer is empty, fill it with input data */
+	if (!*len)
+	{
+		/* Free the previous buffer and set it to NULL */
+		free(*buff);
+		*buff = NULL;
+		/* Set up a signal handler for Ctrl-C interruptions */
+		signal(SIGINT, handle_sign);
 #if USE_GETLINE
 
-                /* Use getline to read input into the buffer */
-                a = getline(buff, &len_p, stdin);
+		/* Use getline to read input into the buffer */
+		a = getline(buff, &len_p, stdin);
 #else
-                /* Use a custom _getline function to read input */
-                a = get_line(info, buff, &len_p);
+		/* Use a custom _getline function to read input */
+		a = get_line(info, buff, &len_p);
 #endif
-                if (a > 0)
-                {
-                        if ((*buff)[a - 1] == '\n')
-                        {
-                                /* Remove trailing newline if present */
-                                (*buff)[a - 1] = '\0'; /* remove trailing newline */
-                                a--;
-                        }
-                        /* Set the linecount_flag and process the input */
-                        info->linecount_flag = 1;
-                        remv_comnt(*buff);
-                        build_histList(info, *buff, info->historycount++);
-                        /* Check if this is a command chain (';'-separated commands) */
-                        {
-                                *len = a;
-                                info->cmd_buffer = buff;
-                        }
-                }
-        }
-	/* Return the number of bytes read (r) or -1 on error
-    return (r); */
-        return (a);
+		if (a > 0)
+		{
+			if ((*buff)[a - 1] == '\n')
+			{
+				/* Remove trailing newline if present */
+				(*buff)[a - 1] = '\0'; /* remove trailing newline */
+				a--;
+			}
+			/* Set the linecount_flag and process the input */
+			info->linecount_flag = 1;
+			remv_comnt(*buff);
+			build_histList(info, *buff, info->historycount++);
+			/* Check if this is a command chain (';'-separated commands) */
+			{
+				*len = a;
+				info->cmd_buffer = buff;
+			}
+		}
+	}
+	/* Return the number of bytes read (a) or -1 on error */
+	return (a);
 }
+
 /**
  * inputGet - Read a line of input, excluding the newline character.
  * @info: Parameter struct containing input information.
@@ -88,13 +88,13 @@ ssize_t inputGet(info_t *info)
 	char **buff_p = &(info->arg), *p;
 	static size_t len;
 	static char *buff; /* the ';' command chain buffer */
-	
+
 	wrt_chr(BUFFER_FLUSH);
 	/* Read input into the buffer and track the number of bytes read */
 	a = input_buf(info, &buff, &len);
 	if (a == -1) /* EOF */
 		return (-1);
-	if (len)	/* we have commands left in the chain buffer */
+	if (len) /* we have commands left in the chain buffer */
 	{
 		c = b; /* init new iterator to current buf position */
 		p = buff + b; /* get pointer for return */
@@ -132,7 +132,7 @@ ssize_t inputGet(info_t *info)
  * It updates the 'i' pointer with the number of bytes read.
  *
  * Return: The number of bytes read (r), or 0 if the buffer is not empty,
- *         or -1 on error.
+ * or -1 on error.
  */
 ssize_t read_buf(info_t *info, char *buf, size_t *i)
 {
@@ -160,39 +160,39 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
  */
 int get_line(info_t *info, char **ptr, size_t *length)
 {
-        static size_t a;        /* Static position indicator */
-        ssize_t b = 0; /* read status variables */
-        ssize_t s = 0;  /* Size status variables */
-        size_t c;       /* Temporary size variable */
-        char *p = NULL; /* Input pointer */
-        char *new_p = NULL;     /* New pointer for reallocation */
-        char *pnl;      /* Pointer to newline character */
-        static size_t leng;     /* Length of the read buffer */
-        static char buff[READ_BUFFER_SIZE]; /* Read buffer */
+	static size_t a; /* Static position indicator */
+	ssize_t b = 0;    /* read status variables */
+	ssize_t s = 0;    /* Size status variables */
+	size_t c;         /* Temporary size variable */
+	char *p = NULL;   /* Input pointer */
+	char *new_p = NULL; /* New pointer for reallocation */
+	char *pnl;       /* Pointer to newline character */
+	static size_t leng; /* Length of the read buffer */
+	static char buff[READ_BUFFER_SIZE]; /* Read buffer */
 
-        p = *ptr;       /* Set input pointer */
-        if (p && length)
-        s = *length;    /* Update length if provided */
-        if (a == leng)
-        a = leng = 0;   /* Reset position indicators */
-        b = read_buf(info, buff, &leng); /* Read data */
-        if (b == -1 || (b == 0 && leng == 0))
-        return (-1);    /* Check for errors */
-        pnl = str_chr(buff + a, '\n'); /* Find newline */
+	p = *ptr; /* Set input pointer */
+	if (p && length)
+		s = *length; /* Update length if provided */
+	if (a == leng)
+		a = leng = 0; /* Reset position indicators */
+	b = read_buf(info, buff, &leng); /* Read data */
+	if (b == -1 || (b == 0 && leng == 0))
+		return (-1); /* Check for errors */
+	pnl = str_chr(buff + a, '\n'); /* Find newline */
 	c = pnl ? 1 + (unsigned int)(pnl - buff) : leng; /* Calculate size */
-        new_p = realloc_mem(p, s, s ? s + c : c + 1); /* Reallocate memory */
-        if (!new_p)
-        return (p ? free(p), -1 : -1); /* Check memory allocation */
-        if (s)
-        strncat(new_p, buff + a, c - a); /* Concatenate strings */
-        else
-        strncpy(new_p, buff + a, c - a + 1); /* Copy strings */
-        s += c - a;     /* Update size */
-        a = c;  /* Update position */
-        p = new_p;      /* Update pointer */
-        if (length)
-        *length = s;    /* Update length if provided */
-        *ptr = p;       /* Update pointer */
+	new_p = realloc_mem(p, s, s ? s + c : c + 1); /* Reallocate memory */
+	if (!new_p)
+		return (p ? free(p), -1 : -1); /* Check memory allocation */
+	if (s)
+		strncat(new_p, buff + a, c - a); /* Concatenate strings */
+	else
+		strncpy(new_p, buff + a, c - a + 1); /* Copy strings */
+	s += c - a; /* Update size */
+	a = c; /* Update position */
+	p = new_p; /* Update pointer */
+	if (length)
+		*length = s; /* Update length if provided */
+	*ptr = p; /* Update pointer */
 
-        return (s);     /* Return the size */
+	return (s); /* Return the size */
 }

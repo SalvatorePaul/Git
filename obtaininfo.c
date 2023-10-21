@@ -15,9 +15,8 @@ void infoSet(info_t *info, char **av)
 
 	info->fname = av[0]; /* Set the program name from the argument vector */
 	if (info->arg)
-	{
-		/* Parse the argument string into an argument vector */
-		info->argv = splitString(info->arg, " \t"); 
+	{/* Parse the argument string into an argument vector */
+	info->argv = splitString(info->arg, " \t");
 		if (!info->argv)
 		{
 			/* Handle memory allocation failure by creating a minimal argv */
@@ -39,7 +38,7 @@ void infoSet(info_t *info, char **av)
 	}
 }
 /**
- * clear_info -  Reset fields within an info_t struct.
+ * infoClear-  Reset fields within an info_t struct.
  * @info: Pointer to the info_t struct to reset.
  * This function resets specific fields within the info_t struct to their
  * initial states, effectively clearing them. It is typically used to prepare
@@ -63,8 +62,9 @@ void infoClear(info_t *info)
  * the info_t struct. It can be used to selectively free specific fields or
  * free all fields by setting the 'all' flag to 1.
  */
- void infoFree(info_t *info, int all)
-{/* Free memory allocated for 'argv' */
+void infoFree(info_t *info, int all)
+{
+	/* Free memory allocated for 'argv' */
 	free_strn(info->argv);
 	info->argv = NULL;
 	info->path = NULL;

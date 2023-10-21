@@ -22,9 +22,6 @@ int set_env(info_t *info, char *variable, char *val)
 
 	if (!variable || !val)
 		return (0); /* If 'var' or 'value' is NULL, no action is taken. */
-	/* Calculate the size of the buffer needed to store the new environment variable.
-    It's the length of 'var' + length of 'value' + 2 for '=' and null terminator. */
-
 	buffer = malloc(lenstrn(variable) + lenstrn(val) + 2);
 	if (!buffer)
 		return (1); /* Allocation error, return 1 for failure. */
@@ -45,7 +42,7 @@ int set_env(info_t *info, char *variable, char *val)
 		node = node->next; /* Move to the next node in the list. */
 	}
 	/* If the variable doesn't exist, add it to the end of the list. */
-	nodeadd_end(&(info->env), buffer, 0); 
+	nodeadd_end(&(info->env), buffer, 0);
 	free(buffer); /* Free the buffer since it's no longer needed. */
 	info->env_changed = 1; /* Indicate that the environment has changed. */
 	return (0); /* Return 0 for success. */
@@ -56,7 +53,7 @@ int set_env(info_t *info, char *variable, char *val)
  *        Used to maintain a consistent function prototype.
  * @var: The string representing the environment variable property to remove.
  * Return: 1 if the variable is deleted, 0 otherwise
- * 
+ *
  */
 int unset_env(info_t *info, char *var)
 {
@@ -84,7 +81,7 @@ int unset_env(info_t *info, char *var)
 		node = node->next;
 		a++;
 	}
-	return (info->env_changed); /* Return 1 if the variable was deleted, 0 otherwise */
+	return (info->env_changed); /* Return 1 if deleted, 0 otherwise */
 }
 /**
  * get_environ - Returns a string array copy of our environment variables.

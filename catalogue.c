@@ -21,7 +21,7 @@ size_t print_strList(const list_t *h)
 }
 /**
  *freeList - Frees all nodes and their string elements in a list.
- *@head_ptr: Address of a pointer to the head node of the list.
+ *@head_pter: Address of a pointer to the head node of the list.
  *Return: void
  */
 void freeList(list_t **head_pter)
@@ -41,13 +41,13 @@ void freeList(list_t **head_pter)
 		free(node); /* Free the current node */
 		node = next_node; /* Move to the next node */
 	}
-	*head_pter = NULL; /* Set the head pointer to NULL to indicate an empty list */
+	*head_pter = NULL; /* Set head pointer to NULL to indicate an empty list */
 }
 /**
  *nodeadd_end - Adds a new node at the end of a list_t linked list.
  *@head: A pointer to a pointer to the head node of the list.
- *@str: The string to be stored in the new node.
- *@num: The node index used by history.
+ *@strn: The string to be stored in the new node.
+ *@numb: The node index used by history.
  *Return: The address of the new node, or NULL if it fails.
  */
 list_t *nodeadd_end(list_t **head, const char *strn, int numb)
@@ -83,7 +83,7 @@ list_t *nodeadd_end(list_t **head, const char *strn, int numb)
 	return (new_node); /* Return the address of the new node */
 }
 /**
- *nodeDelete_at_index- Deletes a node at the given index in a list_t linked list.
+ *nodeDelete_at_index- Deletes a node at the given index in a list_t,
  *@head: Address of a pointer to the first node.
  *@index: Index of the node to delete.
  *Return: 1 on success, 0 on failure.
@@ -128,8 +128,8 @@ int nodeDelete_at_index(list_t **head, unsigned int index)
 /**
  *nodeadd - Adds a new node to the start of a list_t linked list.
  *@head: Address of a pointer to the head node.
- *@str: The string to be stored in the new node.
- *@num: The node index used by history.
+ *@strn: The string to be stored in the new node.
+ *@numb: The node index used by history.
  *Return: The address of the new node, or NULL if it fails.
  */
 list_t *nodeadd(list_t **head, const char *strn, int numb)
@@ -152,7 +152,7 @@ list_t *nodeadd(list_t **head, const char *strn, int numb)
 			return (NULL); /* Return NULL if strdup fails */
 		}
 	}
-	new_head->next = *head; /* Set the next pointer of the new node to the current head */
+	new_head->next = *head;
 	*head = new_head; /* Update the head pointer to the new node */
 	return (new_head); /* Return the address of the new node */
 }

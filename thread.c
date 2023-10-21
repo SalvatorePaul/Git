@@ -5,8 +5,9 @@
  *
  * @s1: Pointer to the first string.
  * @s2: Pointer to the second string.
+ * @n: The maximum number of characters to compare.
  *
- * Return: 
+ * Return:
  *   - Negative value if s1 is lexicographically less than s2.
  *   - Positive value if s1 is lexicographically greater than s2.
  *   - Zero if s1 and s2 are equal up to the specified length.
@@ -14,24 +15,19 @@
 int cmpstrn(const char *s1, const char *s2, size_t n)
 {
 	(void)n;
-    /* Iterate through both strings as long as both are not null terminators. */
-    for (; *s1 && *s2; s1++, s2++)
-    {
-        /* If characters at the current positions are different, return the
-           difference (positive or negative). */
-        if (*s1 != *s2)
-            return (*s1 - *s2);
-    }
-    
-    /* If we reached the end of both strings and they are equal up to this point,
-       return 0. */
-    if (*s1 == *s2)
-        return (0);
-    /* If one string is shorter than the other, consider the shorter one as
-       lexicographically less. */
-    else
-        return (*s1 < *s2 ? -1 : 1);
+	/* Iterate through both strings as long as both are not null terminators. */
+	for (; *s1 && *s2; s1++, s2++)
+	{/* If characters @ d current positions r different, return difference +/-. */
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+	}
+	/* End of both strings n dy r equal up 2 ds point, return 0. */
+	if (*s1 == *s2)
+		return (0);
+	else
+		return (*s1 < *s2 ? -1 : 1);
 }
+
 /**
  * lenstrn - Calculate the length of a string.
  *
@@ -44,18 +40,19 @@ int cmpstrn(const char *s1, const char *s2, size_t n)
  */
 int lenstrn(char *s)
 {
-    int a;  /* Declare the counter variable */
+	int a;  /* Declare the counter variable */
 
-    if (!s)
-        return (0);
+	if (!s)
+		return (0);
 
-    for (a = 0; s[a] != '\0'; a++)  /* Use a for loop to iterate until the null terminator */
-    {
-        /* No need to increment 'a' explicitly; it's done in the loop header */
-    }
+	for (a = 0; s[a] != '\0'; a++)
+	{
+		/* No need to increment 'a' explicitly; it's done in the loop header */
+	}
 
-    return (a);  /* Return the calculated length of the string */
+	return (a);  /* Return the calculated length of the string */
 }
+
 /**
  * catstrn - Concatenate two strings.
  *
@@ -66,21 +63,20 @@ int lenstrn(char *s)
  */
 char *catstrn(char *dest, char *src)
 {
-    char *result = dest;
+	char *result = dest;
 
-    /* Move the 'dest' pointer to the end of the destination string. */
-    for (; *dest; dest++)
-        ;
+	/* Move the 'dest' pointer to the end of the destination string. */
+	for (; *dest; dest++)
+		;
+	for (; *src; src++, dest++)
+		*dest = *src;
 
-    /* Copy characters from 'src' to 'dest' until the null terminator of 'src' is reached. */
-    for (; *src; src++, dest++)
-        *dest = *src;
+	/* Append a null terminator to the concatenated string. */
+	*dest = '\0';
 
-    /* Append a null terminator to the concatenated string. */
-    *dest = '\0';
-
-    return (result);
+	return (result);
 }
+
 /**
  * starts_with_strn - Check if 'jill' starts with 'jack'.
  *
@@ -94,13 +90,12 @@ char *catstrn(char *dest, char *src)
  */
 char *starts_with_strn(const char *jack, const char *jill)
 {
-    for (; *jill; jill++, jack++)
-    {
-        if (*jill != *jack)
-        {
-            return (NULL);  /* Return NULL if the characters do not match */
-        }
-    }
-
-    return (char *)jack;  /* Return the address of the next character in 'jack' */
+	for (; *jill; jill++, jack++)
+	{
+		if (*jill != *jack)
+		{
+			return (NULL);  /* Return NULL if the characters do not match */
+		}
+	}
+	return ((char *)jack);  /* Return d address of d next character in 'jack' */
 }

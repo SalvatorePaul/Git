@@ -8,7 +8,7 @@
  * writing them to stderr, flushing the buffer when necessary.
  *
  * Return: On success, it returns 1. On error, -1 is returned, and errno is
- *         set appropriately.
+ * set appropriately.
  */
 int _errputchar(char c)
 {
@@ -38,17 +38,17 @@ int _errputchar(char c)
  */
 int _putfnd(char c, int fd)
 {
-        static char buff[WRITE_BUFFER_SIZE];
-        static int a;
+	static char buff[WRITE_BUFFER_SIZE];
+	static int a;
 
-        if (c == BUFFER_FLUSH || a >= WRITE_BUFFER_SIZE)
-        {
-                write(fd, buff, a);
-                a = 0;
-        }
-        if (c != BUFFER_FLUSH)
-                buff[a++] = c;
-        return (1);
+	if (c == BUFFER_FLUSH || a >= WRITE_BUFFER_SIZE)
+	{
+		write(fd, buff, a);
+		a = 0;
+	}
+	if (c != BUFFER_FLUSH)
+		buff[a++] = c;
+	return (1);
 }
 
 /**
@@ -68,11 +68,12 @@ int _putsfnd(char *str, int fd)
 		return (0);
 	for (; *str; str++)
 	{
-		 /* Write the character to the file descriptor using _putfnd() */
+		/* Write the character to the file descriptor using _putfnd() */
 		i += _putfnd(*str, fd);
 	}
 	return (i);
 }
+
 /**
  * _errputs - Print an input string to the standard error stream.
  * @str: The string to be printed.
@@ -83,15 +84,14 @@ int _putsfnd(char *str, int fd)
  */
 void _errputs(char *str)
 {
-	int a = 0; 
-	
+	int a = 0;
+
 	/* Check if the input string is NULL, in which case, do nothing. */
 	if (!str)
 		return;
-		/* Iterate through the characters in 'str' until the null-terminator is encountered. */
 	while (str[a] != '\0')
 	{
-		/* Call _eputchar to write the current character to the standard error stream (stderr). */
+		/* Call _errputchar to write the current character to the stderr. */
 		_errputchar(str[a]);
 		a++;
 	}

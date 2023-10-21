@@ -2,8 +2,8 @@
 
 /**
  * chnge_dir - Changes the current directory of the process.
- * @info: Pointer to a structure containing potential function arguments and context.
- * This function is intended to modify the current working directory of the process,
+ * @info: Pointer to a structure containing potential function arguments.
+ * This function is intended to modify d current working dir of the process,
  * but it is currently not fully implemented and serves as a placeholder.
  *
  * Return: Always returns 0 to indicate success.
@@ -75,7 +75,6 @@ int cd(info_t *info)
 	}
 	return (0);
 }
-	
 /**
  * exit_cmd - exits the shell program.
  * @info: A structure containing potential arguments and context.
@@ -88,7 +87,7 @@ int exit_cmd(info_t *info)
 
 	if (info->argv[1])  /* check if there is an exit arguement */
 	{
-		exit_check = err_atoi(info->argv[1]); /* Convert exit status to an integer. */
+		exit_check = err_atoi(info->argv[1]);
 		if (exit_check == -1)
 		{
 			info->status = 2;
