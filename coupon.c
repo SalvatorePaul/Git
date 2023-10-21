@@ -67,9 +67,12 @@ char **splitString(char *inputString, char *delimiterString)
 {
 	int numWords = 0; /* Number of characters in a word */
 	char **resultArray; /* Array to store the resulting words */
-	int index1, index2, index3, index4;
+	int index1;
+	int index2;
+	int index3;
+	int index4;
 
-	if (inputString == NULL || inputString[0] == 0)
+	if (inputString == NULL || inputString[0] == '\0')
 		return (NULL); /* Check for NULL or empty input string */
 
 	if (!delimiterString)
