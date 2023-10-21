@@ -17,12 +17,13 @@ char **splitString1(char *inputStr, char delimiter)
 		return (NULL); /* Check for empty or NULL input string */
 	/* Count the number of words based on the delimiter */
 	for (currentIndex = 0; inputStr[currentIndex] != '\0'; currentIndex++)
-	{
-		if ((inputStr[currentIndex] != delimiter && inputStr[currentIndex + 1] == delimiter) ||
-				inputStr[currentIndex] != delimiter && !inputStr[currentIndex + 1]) ||
-			inputStr[currentIndex + 1] == delimiter)
-			numWords++;
-	}
+	if ((inputStr[currentIndex] != delimiter && inputStr[currentIndex + 1] ==
+				delimiter) || (inputStr[currentIndex] != delimiter &&
+					!inputStr[currentIndex + 1]) || (inputStr[currentIndex + 1] == delimiter))
+{
+	numWords++;
+}
+
 
 	if (numWords == 0)
 		return (NULL); /* No words found */
@@ -101,7 +102,10 @@ char **splitString(char *inputString, char *delimiterString)
 		index3 = 0;
 
 		while (!check_delim(inputString[index1 + index3], delimiterString) &&
-				inputString[index1 + index3])index3++;
+				inputString[index1 + index3])
+		{
+			index3++;
+		}
 
 		resultArray[index2] = malloc((index3 + 1) * sizeof(char));
 
