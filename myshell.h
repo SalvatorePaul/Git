@@ -198,10 +198,10 @@ void infoSet(info_t *, char **);
 void infoClear(info_t *);
 void infoFree(info_t *, int);
 
-char *get_env(info_t *, const char *); /* Get an environment variable */
-int env_cmd(info_t *); /* Built-in env command */
-int setenv_cmd(info_t *); /* Built-in setenv command */
-int unsetenv_cmd(info_t *); /* Built-in unsetenv command */
-int populateEnv_list(info_t *); /* Populate environment variables list */
+char *get_env(info_t *, const char *);
+int env_cmd(info_t *);
+int setenv_cmd(info_t *);
+int unsetenv_cmd(info_t *);
+int populateEnv_list(info_t *);
 
 #endif /* MY_SHELL_H */

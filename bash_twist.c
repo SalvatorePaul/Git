@@ -115,6 +115,7 @@ void forkExe_command(info_t *info)
 			return;
 		case 0:/* Child process */
 			if (execve(info->path, info->argv, environ) == -1)
+			{
 				infoFree(info, 1);
 				switch (errno)
 				{
@@ -123,10 +124,12 @@ void forkExe_command(info_t *info)
 					default:
 						exit(1); /* Exec error */
 				}
+			}
 			break;
 		default:/* Parent process - Waits for the child to complete */
 			wait(&(info->status));
 			if (WIFEXITED(info->status))
+			{
 				info->status = WEXITSTATUS(info->status);
 				switch (info->status)
 				{
@@ -136,6 +139,7 @@ void forkExe_command(info_t *info)
 					default:
 						break;
 				}
+			}
 			break;
 	}
 }

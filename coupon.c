@@ -83,6 +83,7 @@ char **splitString1(char *inputStr, char delimiter)
 	if (!wordArray)
 		return (NULL); /* Memory allocation failed */
 	for (currentIndex = 0, wordIndex = 0; wordIndex < numWords; wordIndex++)
+{
 		while (inputStr[currentIndex] == delimiter && inputStr[currentIndex] != '\0')
 			currentIndex++;
 		charCount = 0;
