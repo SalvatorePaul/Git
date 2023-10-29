@@ -72,11 +72,7 @@ char **splitString1(char *inputStr, char delimiter)
 	if ((inputStr[currentIndex] != delimiter && inputStr[currentIndex + 1] ==
 				delimiter) || (inputStr[currentIndex] != delimiter &&
 					!inputStr[currentIndex + 1]) || (inputStr[currentIndex + 1] == delimiter))
-{
-	numWords++;
-}
-
-
+		numWords++;
 	if (numWords == 0)
 		return (NULL); /* No words found */
 	wordArray = malloc((1 + numWords) * sizeof(char *));
